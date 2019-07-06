@@ -5,6 +5,6 @@ class Story(models.Model):
     objects = models.Manager()
 
     message = models.TextField()
-    refugee_id = models.OneToOneField(to=Refugee, on_delete=models.CASCADE)
+    refugee = models.OneToOneField(to=Refugee, on_delete=models.CASCADE)
     is_from_refugee = models.BooleanField()
     image_url = models.TextField(blank=True)

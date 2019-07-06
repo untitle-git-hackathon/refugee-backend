@@ -5,4 +5,4 @@ class Refugee(models.Model):
     objects = models.Manager()
     
     name = models.CharField(max_length=10)
-    location_id = models.OneToOneField(to=Location, on_delete=models.CASCADE)
+    location = models.OneToOneField(to=Location, on_delete=models.CASCADE)

@@ -35,13 +35,13 @@ class RefugeeViewSet(viewsets.ModelViewSet):
 class StorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
-        fields = ('message', 'is_from_refugee', 'image_url', 'refugee_id_id')
+        fields = ('message', 'is_from_refugee', 'image_url', 'refugee_id')
 
 class StoryViewSet(viewsets.ModelViewSet):
     serializer_class = StorySerializer
     def get_queryset(self):
         refugee_id = self.kwargs['refugee_id']
-        return get_list_or_404(Story, refugee_id_id=refugee_id)
+        return get_list_or_404(Story, refugee_id=refugee_id)
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:

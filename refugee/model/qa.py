@@ -1,5 +1,5 @@
 from django.db import models
-from story import Story
+from .story import Story
 
 class Qa(models.Model):
     correct_answer_image = models.CharField(max_length=30)

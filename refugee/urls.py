@@ -14,8 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from .model.refugee import Refugee
+
+from rest_framework import routers, serializers, viewsets
+
+class RefugeeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Refugee
+        fields = ('name', 'location_id')
+
+class RefugeeViewSet(viewsets.ModelViewSet):
+    queryset = Refugee.objects.all()
+    serializer_class = RefugeeSerializer
+
+router = routers.DefaultRouter()
+router.register(r'refugee', RefugeeViewSet)
 
 urlpatterns = [
+    path(r'^', include(router.urls)),
     path('admin/', admin.site.urls),
 ]

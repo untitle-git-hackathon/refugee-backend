@@ -2,7 +2,7 @@
 
 ## API Scheme
 
-- `GET` `/refugees`
+- `GET /refugees`
 
 ```json
 [
@@ -11,11 +11,10 @@
         "name": "",
         "location_id": 0
     }
-    // ...
 ]
 ```
 
-- `GET` `/stories/{refugee_id}`
+- `GET /stories/{refugee_id}`
 
 ```json
 [
@@ -23,11 +22,10 @@
         "message": "test message",
         "image_src": "",
     }
-    // ...
 ]
 ```
 
-- `GET` `/location/{id}`
+- `GET /location/{id}`
 
 ```json
 {

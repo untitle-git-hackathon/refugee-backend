@@ -1,4 +1,7 @@
 # Refugees
+## 어떻게 실행하나요?
+
+`docker-compose up`
 
 ## API Scheme
 

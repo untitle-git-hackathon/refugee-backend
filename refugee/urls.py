@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import get_list_or_404
 from .models.refugee import Refugee
 from .models.story import Story
 from .models.location import Location
@@ -38,12 +39,9 @@ class StorySerializer(serializers.ModelSerializer):
 
 class StoryViewSet(viewsets.ModelViewSet):
     serializer_class = StorySerializer
-
     def get_queryset(self):
         refugee_id = self.kwargs['refugee_id']
-        if not Story.objects.filter(refugee_id_id=refugee_id):
-            return None
-        return Story.objects.filter(refugee_id_id=refugee_id)
+        return get_list_or_404(Story, refugee_id_id=refugee_id)
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,11 +52,8 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
 
     def get_queryset(self):
-        refugee_id = self.kwargs['id']
-        if not Story.objects.filter(refugee_id_id=refugee_id):
-            return None
-        return Story.objects.filter(refugee_id_id=refugee_id)
-
+        id = self.kwargs['id']
+        return get_list_or_404(Location, id=id)
 
 class QaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,18 +64,14 @@ class QaViewSet(viewsets.ModelViewSet):
     serializer_class = QaSerializer
 
     def get_queryset(self):
-        refugee_id = self.kwargs['message_id']
-        if not Story.objects.filter(refugee_id_id=refugee_id):
-            return None
-        return Story.objects.filter(refugee_id_id=refugee_id)
-
-
+        message_id = self.kwargs['message_id']
+        return get_list_or_404(Qa, story_id=message_id)
 
 router = routers.DefaultRouter()
 router.register(r'refugee', RefugeeViewSet)
 router.register(r'story/(?P<refugee_id>.+)', StoryViewSet, base_name='Story')
-router.register(r'location/(?P<id>.+)', StoryViewSet, base_name='Story')
-router.register(r'qa/(?P<message_id>.+)', StoryViewSet, base_name='Story')
+router.register(r'location/(?P<id>.+)', LocationViewSet, base_name='Location')
+router.register(r'qa/(?P<message_id>.+)', QaViewSet, base_name='Qa')
 
 urlpatterns = [
     path('', include(router.urls)),

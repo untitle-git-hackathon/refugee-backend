@@ -21,7 +21,7 @@
     {
         "message": "test message",
         "image_src": "",
-				"is_from_refugee": true,
+	"is_from_refugee": true,
     }
 ]
 ```

@@ -34,3 +34,11 @@
     "url": "",
 }
 ```
+
+- `GET /qa/{message_id}`
+
+```json
+{
+    "correct_answer_image": "",
+    "wrong_answer_image": "",
+}

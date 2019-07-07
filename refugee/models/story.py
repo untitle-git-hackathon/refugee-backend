@@ -8,3 +8,4 @@ class Story(models.Model):
     refugee = models.OneToOneField(to=Refugee, on_delete=models.CASCADE)
     is_from_refugee = models.BooleanField()
     image_url = models.TextField(blank=True)
+    sort_id = models.IntegerField()
